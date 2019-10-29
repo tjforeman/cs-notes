@@ -1,5 +1,6 @@
 # Dictionaries
 
+# defining and creating dictionary 
 d = {
     "foo": 12,
     "bar": 20
