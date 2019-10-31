@@ -51,6 +51,36 @@ class Dept:
     def __repr__(self):
         return f'Dept:({repr(self.name)})'
 
+# in the base class we only want attributes that are common to everything in class
+class Product:
+    def __init__(self, name, price, count):
+        self.name = name
+        self.price = price
+        self.count = count 
+
+# Clothing is a Product
+class Clothing(Product):
+    def __init__ (self, name, price, count):
+        self.name = name
+        self.price = price
+        self.count = count
+
+# SportingGoods is a Product
+class SportingGoods(Product):
+    def __init__(self, name, price, count, color):
+        super().__init__(name, price, count)
+        self.color = color
+
+class Shirt(Clothing):
+    def __init__(self, name, price, count, sleeve_length):
+        super().__init__(name, price, count)
+        self.sleeve_length = sleeve_length
+
+class Shoes(Clothing):
+    pass
+
+
+
 
 # s is an object 
 s = Store("Tylermart") # instantiate a new instance of a class store

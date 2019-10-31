@@ -8,4 +8,13 @@
  
  - Procedural and Functional programming are other examples of programming paradigms
 
- - 
+ Multiple class inheritence 
+
+ class:A
+    pass
+
+class B:
+    pass
+
+class C(A,B)
+    pass
