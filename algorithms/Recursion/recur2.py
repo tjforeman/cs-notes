@@ -19,3 +19,27 @@ def fib(n):
 
 for i in range(10):
     print(f'{i}: {fib(i)}')
+
+
+def fib_bottom_up(n): # 0(n) time complexity 0(1) space complexity 
+    if n == 0: return 0
+    if n == 1: return 1
+
+    p2 = 0
+    p = 1
+
+    count = 0
+
+
+    while count < n-1:
+        c= p + p2
+        p2 = p
+        p = c 
+        
+
+        count += 1
+
+    return c  
+    
+for i in range(500):
+    print(f'{i}: {fib_bottom_up(i)}')
