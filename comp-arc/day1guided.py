@@ -6,6 +6,8 @@ PRINT_TYLER = 1
 HALT = 2 
 SAVE_REG = 3 # like LDI
 PRINT_REG = 4 # like PRN
+PUSH = 5
+POP = 6
 
 memory = [0] * 256
 # memory = [
@@ -20,14 +22,19 @@ memory = [0] * 256
 # int(s ,2 (base 2 number))
 registers = [0] * 8
 
+SP = 7
+
 filename = sys.argv[1]
 address = 0
 
 with open(filename) as f:
     for line in f:
-        # n= line.split('#')
-        # n[0] = n.strip()
-        val = int(line)
+        n= line.split('#')
+        n2 = n[0].strip()        
+        if n2 == '':
+            continue
+
+        val = int(n2)
         memory[address] = val
         address += 1 
 
@@ -53,6 +60,27 @@ while running:
     elif current_instruction == PRINT_REG:
         reg_num = memory[pc+1]
         print (registers[reg_num])
+        pc += 2
+
+    elif current_instruction == PUSH:
+        # decrement stack pointer(reg7)
+        # copy value from register to memory at sp
+        registers[SP] -= 1
+
+        reg_num = memory[pc + 1]
+        value = registers[reg_num]
+        memory[registers[SP]] = value
+
+        pc += 2
+
+    elif current_instruction == POP:
+        # copy the value from the top of the stack into the given register
+        reg_num = memory[pc + 1]
+        value = memory[registers[SP]]
+        registers[reg_num] = value
+
+        # increment SP
+        registers[SP] +=1
         pc += 2
 
     else:
