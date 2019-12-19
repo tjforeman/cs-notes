@@ -8,6 +8,8 @@ SAVE_REG = 3 # like LDI
 PRINT_REG = 4 # like PRN
 PUSH = 5
 POP = 6
+CALL = 7
+RET = 8
 
 memory = [0] * 256
 # memory = [
@@ -82,6 +84,26 @@ while running:
         # increment SP
         registers[SP] +=1
         pc += 2
+
+    elif current_instruction == CALL:
+        # push the return address onto the stack
+        return_address = pc + 2
+        registers[SP] -= 1
+        memory[registers[SP]] = return_address
+
+        # set the PC to the value in the register
+        reg_num = memory[pc + 1]
+        sub_address = registers[reg_num]
+        pc = sub_address
+
+        # pc += 2 DON'T DO THIS
+
+    elif current_instruction == RET:
+        # pop the return address off of the stack
+        return_address= memory[registers[SP]]
+        registers[SP] += 1
+        # store it in the pc 
+        pc = return_address
 
     else:
         print(f'unknown instruction at address{pc} ')
