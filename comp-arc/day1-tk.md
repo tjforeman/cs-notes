@@ -19,6 +19,7 @@
 |+-----2s place, 0b10's place
 ||+----1s place, 0b1's place 
 |||
+|||
 000 Binary, base 2
 001
 010
@@ -28,3 +29,4 @@
 +-----256s place (16^2)
 |+----16s place (16^1)
 ||+---1s place(16^0)
+|||
